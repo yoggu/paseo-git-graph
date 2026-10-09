@@ -2,7 +2,9 @@
   "name": "paseo-git-graph",
   "private": true,
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.2.1",
+  "repository": { "type": "git", "url": "git+https://github.com/yoggu/paseo-git-graph.git" },
+  "engines": { "node": ">=24" },
   "license": "(MIT AND Apache-2.0)",
   "description": "Paseo port of yoggu/dsh-git-graph: compact Git history, working-tree diffs and confirmed Git actions.",
   "files": [
@@ -10,6 +12,8 @@
     "THIRD_PARTY_NOTICES.md",
     "licenses/",
     "README.md",
+    "OVERVIEW.md",
+    "SECURITY.md",
     "paseo-plugin.json",
     "index.client.ts",
     "index.client.tsx",
@@ -26,7 +30,8 @@
     "test:browser": "node --experimental-strip-types tests/browser/run.mjs"
   },
   "devDependencies": {
-    "@getpaseo/plugin": "0.11.0-beta.5",
+    "@getpaseo/highlight": "0.11.0-beta.5",
+    "@getpaseo/plugin": "0.11.1",
     "@tanstack/react-query": "^5.90.11",
     "@types/node": "^24.19.1",
     "@types/react": "~19.2.0",
@@ -38,8 +43,5 @@
     "react-native-web": "^0.21.2",
     "typescript": "^5.9.3",
     "zod": "^4.4.3"
-  },
-  "dependencies": {
-    "@getpaseo/highlight": "0.11.0-beta.5"
   }
 }

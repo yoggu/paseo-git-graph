@@ -1,4 +1,6 @@
 {
   "id": "paseo-git-graph",
-  "requirements": { "paseo": ">=0.11.0-beta.5" }
+  "name": "Git Graph",
+  "description": "Git history, working-tree diffs and confirmed Git actions.",
+  "requirements": { "paseo": ">=0.11.1" }
 }
