@@ -9,11 +9,9 @@
   "description": "Paseo port of yoggu/dsh-git-graph: compact Git history, working-tree diffs and confirmed Git actions.",
   "files": [
     "LICENSE",
-    "THIRD_PARTY_NOTICES.md",
+    "NOTICE",
     "licenses/",
     "README.md",
-    "OVERVIEW.md",
-    "SECURITY.md",
     "paseo-plugin.json",
     "index.client.ts",
     "index.client.tsx",
@@ -25,7 +23,7 @@
   ],
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build:syntax": "esbuild server/syntax.js --bundle --platform=node --format=esm --minify --legal-comments=inline --outfile=server/syntax-runtime.js --banner:js=\"/*! Generated from the Paseo diff highlighter and @getpaseo/highlight 0.11.0-beta.5 (Lezer/CodeMirror). See THIRD_PARTY_NOTICES.md and licenses/. */\"",
+    "build:syntax": "esbuild server/syntax.js --bundle --platform=node --format=esm --minify --legal-comments=inline --outfile=server/syntax-runtime.js --banner:js=\"/*! Generated from the Paseo diff highlighter and @getpaseo/highlight 0.11.0-beta.5 (Lezer/CodeMirror). See NOTICE and licenses/. */\"",
     "test": "node --experimental-strip-types --test --test-concurrency=2 tests/*.test.js",
     "test:browser": "node --experimental-strip-types tests/browser/run.mjs"
   },

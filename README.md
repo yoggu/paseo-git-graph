@@ -26,13 +26,12 @@ paseo plugin update paseo-git-graph
 
 **Only open trusted repositories.** Plugins are unsandboxed, Git can execute hooks and helpers, and destructive actions can lose work. Remote actions use existing Git/SSH credentials; there is no automatic fetch or telemetry. Search covers loaded commits only.
 
-Details: [OVERVIEW.md](OVERVIEW.md) · [SECURITY.md](SECURITY.md)
-
 ## Development
 
 Node.js 24+: `npm ci --ignore-scripts`, `npm run typecheck`, `npm test`.
 For browser tests: `npx --no-install playwright-core install chromium`, then `npm run test:browser` (or set `CHROME_BIN`).
 The highlighter is bundled; `npm run build:syntax` regenerates it.
 Install locally with `paseo plugin install "$PWD"`; reload with `paseo plugin reload paseo-git-graph`.
+React Native development tooling has known audit warnings (`npm audit`); it is not shipped with the plugin.
 
-Own/DSH code: [MIT](LICENSE). Adapted Paseo code: Apache-2.0; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Own/DSH code: [MIT](LICENSE). Adapted Paseo code: Apache-2.0; see [NOTICE](NOTICE).
