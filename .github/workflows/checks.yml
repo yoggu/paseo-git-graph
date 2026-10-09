@@ -25,6 +25,7 @@ jobs:
           "$directory/gitleaks" git . --log-opts=--all --redact
   test:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}

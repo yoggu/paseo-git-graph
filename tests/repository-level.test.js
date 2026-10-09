@@ -440,7 +440,7 @@ test('many immediate directories are complete, streamed and sequential; director
   assert.deepEqual(result.children.map(item => item.path), Array.from({ length: 200 }, (_, i) => `dir-${String(i).padStart(3, '0')}`))
   assert.deepEqual(new Set(calls), new Set([join(root, 'dir-099'), join(root, 'dir-199')]))
   for (const levelLimits of [{ ...LEVEL_LIMITS, directories: 10 }, { ...LEVEL_LIMITS, entries: 10 }]) {
-    await assert.rejects(access({ levelLimits }).repositoryLevel(ctx, { ...request, includeChildren: true }), /too many.*(directories|entries)/)
+    await assert.rejects(access({ levelLimits, repoRoot: async cwd => cwd }).repositoryLevel(ctx, { ...request, includeChildren: true }), /too many.*(directories|entries)/)
   }
 })
 
