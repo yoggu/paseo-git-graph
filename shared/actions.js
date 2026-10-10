@@ -7,7 +7,7 @@
  * argument list, so an entry that drifted from the host's own table would show
  * the difference before anything ran rather than quietly doing something else.
  *
- * @module dsh-git-graph/actions
+ * @module paseo-git-graph/actions
  */
 
 /**

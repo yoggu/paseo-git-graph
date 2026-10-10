@@ -5,8 +5,8 @@
   "version": "0.2.1",
   "repository": { "type": "git", "url": "git+https://github.com/yoggu/paseo-git-graph.git" },
   "engines": { "node": ">=24" },
-  "license": "(MIT AND Apache-2.0)",
-  "description": "Paseo port of yoggu/dsh-git-graph: compact Git history, working-tree diffs and confirmed Git actions.",
+  "license": "MIT",
+  "description": "Compact Git history, working-tree diffs and confirmed Git actions in a Paseo workspace panel.",
   "files": [
     "LICENSE",
     "NOTICE",

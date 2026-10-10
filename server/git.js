@@ -1,5 +1,5 @@
 /**
- * Host half of `dsh-git-graph`: answer Git questions about the repository that
+ * Host half of `paseo-git-graph`: answer Git questions about the repository that
  * belongs to the calling Session's workspace, and carry out the writing actions
  * a reader confirms.
  *
@@ -27,7 +27,7 @@
  * values, never from raw command text, so no request can reach git's argument
  * parser on its own terms.
  *
- * @module dsh-git-graph
+ * @module paseo-git-graph
  */
 
 import { execFile } from 'node:child_process'
@@ -936,13 +936,13 @@ async function repositoryState(root) {
  */
 async function requireRefName(root, value, label) {
   const text = requireString(value, label)
-  if (text.startsWith('-')) throw new Error(`dsh-git-graph: refusing ${label} ${text}`)
-  if (text.includes('@{')) throw new Error(`dsh-git-graph: refusing ${label} ${text}`)
-  if (text.length > 255) throw new Error(`dsh-git-graph: ${label} is too long`)
+  if (text.startsWith('-')) throw new Error(`paseo-git-graph: refusing ${label} ${text}`)
+  if (text.includes('@{')) throw new Error(`paseo-git-graph: refusing ${label} ${text}`)
+  if (text.length > 255) throw new Error(`paseo-git-graph: ${label} is too long`)
   try {
     await git(root, ['check-ref-format', '--branch', text])
   } catch {
-    throw new Error(`dsh-git-graph: ${label} ${text} is not a valid branch or tag name`)
+    throw new Error(`paseo-git-graph: ${label} ${text} is not a valid branch or tag name`)
   }
   return text
 }
@@ -981,12 +981,12 @@ async function requireTarget(root, value, label) {
  */
 function requirePath(value, label) {
   const text = requireString(value, label)
-  if (text.startsWith('-')) throw new Error(`dsh-git-graph: refusing ${label} ${text}`)
+  if (text.startsWith('-')) throw new Error(`paseo-git-graph: refusing ${label} ${text}`)
   if (text.startsWith('/') || /^[a-zA-Z]:[\\/]/.test(text)) {
-    throw new Error(`dsh-git-graph: ${label} must be relative to the repository`)
+    throw new Error(`paseo-git-graph: ${label} must be relative to the repository`)
   }
   if (text.split(/[\\/]/).includes('..')) {
-    throw new Error(`dsh-git-graph: ${label} must stay inside the repository`)
+    throw new Error(`paseo-git-graph: ${label} must stay inside the repository`)
   }
   return text
 }
@@ -1012,12 +1012,12 @@ async function requireRemote(root, value, label = 'remote') {
   // --force main` then fails with a message about `main` not being a
   // repository. The membership check below cannot catch that, because such a
   // remote really is configured.
-  if (text.startsWith('-')) throw new Error(`dsh-git-graph: refusing ${label} ${text}`)
+  if (text.startsWith('-')) throw new Error(`paseo-git-graph: refusing ${label} ${text}`)
   const known = (await git(root, ['remote']))
     .split('\n')
     .map(line => line.trim())
     .filter(line => line.length > 0)
-  if (!known.includes(text)) throw new Error(`dsh-git-graph: ${text} is not a configured remote`)
+  if (!known.includes(text)) throw new Error(`paseo-git-graph: ${text} is not a configured remote`)
   return text
 }
 
@@ -1036,7 +1036,7 @@ async function requireRemote(root, value, label = 'remote') {
 function requireChoice(value, allowed, label) {
   const text = requireString(value, label)
   if (!Object.prototype.hasOwnProperty.call(allowed, text)) {
-    throw new Error(`dsh-git-graph: ${label} must be one of ${Object.keys(allowed).join(', ')}`)
+    throw new Error(`paseo-git-graph: ${label} must be one of ${Object.keys(allowed).join(', ')}`)
   }
   return allowed[text]
 }
@@ -1057,7 +1057,7 @@ function optionalMessage(value) {
   const text = String(value)
   if (text.trim().length === 0) return null
   if (text.length > MAX_MESSAGE_LENGTH) {
-    throw new Error(`dsh-git-graph: message is longer than ${MAX_MESSAGE_LENGTH} characters`)
+    throw new Error(`paseo-git-graph: message is longer than ${MAX_MESSAGE_LENGTH} characters`)
   }
   return `--message=${text}`
 }
@@ -1081,7 +1081,7 @@ function requireStashIndex(value) {
     ? value
     : typeof value === 'string' && /^\d+$/.test(value.trim()) ? Number(value.trim()) : Number.NaN
   if (!Number.isInteger(n) || n < 0 || n > 1_000) {
-    throw new Error('dsh-git-graph: stash index must be a whole number')
+    throw new Error('paseo-git-graph: stash index must be a whole number')
   }
   return `stash@{${n}}`
 }
@@ -1096,10 +1096,10 @@ function requireStashIndex(value) {
  */
 function requirePaths(value, label) {
   if (!Array.isArray(value) || value.length === 0) {
-    throw new Error(`dsh-git-graph: ${label} is required`)
+    throw new Error(`paseo-git-graph: ${label} is required`)
   }
   if (value.length > 500) {
-    throw new Error(`dsh-git-graph: too many ${label}`)
+    throw new Error(`paseo-git-graph: too many ${label}`)
   }
   return value.map(entry => requirePath(entry, label))
 }
@@ -1446,7 +1446,7 @@ async function planAction(root, request) {
     case 'revert.abort':
       return plan(['revert', '--abort'], 'git revert --abort', { continuesOperation: true, writesTree: true, writesRefs: true })
     default:
-      throw new Error(`dsh-git-graph: unknown action ${id}`)
+      throw new Error(`paseo-git-graph: unknown action ${id}`)
   }
 }
 
@@ -1471,13 +1471,13 @@ function assertActionAllowed(plan, state) {
     // them a moment later — with a message about a lock file rather than about
     // what the reader was trying to do.
     throw new Error(
-      `dsh-git-graph: another Git process is writing to this repository (${state.lockPath}). `
+      `paseo-git-graph: another Git process is writing to this repository (${state.lockPath}). `
       + 'Wait for it to finish; if it crashed, remove the lock file by hand.',
     )
   }
   if (state.operation !== null && plan.continuesOperation !== true) {
     throw new Error(
-      `dsh-git-graph: a ${OPERATION_LABELS[state.operation] ?? state.operation} is in progress. `
+      `paseo-git-graph: a ${OPERATION_LABELS[state.operation] ?? state.operation} is in progress. `
       + 'Finish it (continue or abort) before running anything else.',
     )
   }
@@ -1485,7 +1485,7 @@ function assertActionAllowed(plan, state) {
     // `cherryPick.continue` while a rebase is running would fail inside git
     // with a message about the wrong marker; saying so here names the mismatch.
     throw new Error(
-      `dsh-git-graph: ${plan.id} does not belong to the `
+      `paseo-git-graph: ${plan.id} does not belong to the `
       + `${OPERATION_LABELS[state.operation] ?? state.operation} in progress`,
     )
   }
@@ -1737,7 +1737,7 @@ async function dispatch(ctx, request) {
     case 'action':
       return runAction(root, request)
     default:
-      throw new Error(`dsh-git-graph: unknown operation ${String(op)}`)
+      throw new Error(`paseo-git-graph: unknown operation ${String(op)}`)
   }
 }
 
@@ -1759,7 +1759,7 @@ function acceptFilterRef(value, refs) {
   const text = requireString(value, 'ref')
   if (text === 'HEAD') return text
   if (refs !== null && refs.refs.some(ref => ref.name === text)) return text
-  throw new Error(`dsh-git-graph: refusing ref ${text}`)
+  throw new Error(`paseo-git-graph: refusing ref ${text}`)
 }
 
 /**
@@ -1787,7 +1787,7 @@ function clampInt(value, fallback, min, max) {
  */
 function requireString(value, label) {
   if (typeof value !== 'string' || value.length === 0) {
-    throw new Error(`dsh-git-graph: ${label} is required`)
+    throw new Error(`paseo-git-graph: ${label} is required`)
   }
   return value
 }
@@ -1809,7 +1809,7 @@ function requireRev(value) {
     return text
   }
   if (/^[0-9a-f]{4,64}$/.test(text)) return text
-  throw new Error(`dsh-git-graph: refusing revision ${text}`)
+  throw new Error(`paseo-git-graph: refusing revision ${text}`)
 }
 
 /**
@@ -1822,7 +1822,7 @@ function requireRev(value) {
 function requireHash(value) {
   const text = requireString(value, 'hash')
   if (!/^[0-9a-f]{40,64}$/.test(text)) {
-    throw new Error(`dsh-git-graph: refusing commit ${text}`)
+    throw new Error(`paseo-git-graph: refusing commit ${text}`)
   }
   return text
 }

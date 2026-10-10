@@ -6,7 +6,7 @@ export const DISCOVERY_LIMITS = Object.freeze({ depth: 6, directories: 5000, mil
 export const LEVEL_LIMITS = Object.freeze({ directories: 10_000, entries: 50_000, milliseconds: 10_000, concurrent: 2, cacheMilliseconds: 15_000, cacheLevels: 32, cacheNodes: 20_000, pending: 64 })
 export const SESSION_GROUP_ID = 'session'
 const SKIP = new Set(['.git', 'node_modules', '.pnpm', '.venv', 'venv', '__pycache__'])
-const fail = message => new Error(`dsh-git-graph: ${message}`)
+const fail = message => new Error(`paseo-git-graph: ${message}`)
 
 export function isContained(base, path) {
   const rel = relative(base, path)

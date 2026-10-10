@@ -1,11 +1,5 @@
 # Third-party notices
 
-## dsh-git-graph
-
-Git backend, repository discovery, graph layout, ref grouping, action definitions and diff parser adapted from https://github.com/yoggu/dsh-git-graph, revision d33b13b6c38e2da066c25f52f611b479c7dff658.
-
-Copyright (c) 2026 Yannick Bättig. MIT; full license in LICENSE.
-
 ## Paseo
 
 The following files derive from https://github.com/getpaseo/paseo, revision f13bb2136cc67265c5bb8c61020caf4c2f606f75:

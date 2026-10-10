@@ -1,5 +1,5 @@
 /**
- * Parser tests for `dsh-git-graph`.
+ * Parser tests for `paseo-git-graph`.
  *
  * The parsers read git's own output, which is where this plugin is most likely
  * to be wrong and least likely to be caught by reading the code. Each case here

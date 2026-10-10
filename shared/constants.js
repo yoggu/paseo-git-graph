@@ -1,15 +1,15 @@
-export const ID = 'dsh-git-graph'
+export const ID = 'paseo-git-graph'
 export const KIND = 'git-graph'
-export const COMMIT_ID = 'dsh-git-graph/commit'
+export const COMMIT_ID = 'paseo-git-graph/commit'
 export const COMMIT_KIND = 'git-commit'
-export const DIFF_ID = 'dsh-git-graph/diff'
+export const DIFF_ID = 'paseo-git-graph/diff'
 export const DIFF_KIND = 'git-diff'
-export const COMPARE_ID = 'dsh-git-graph/compare'
+export const COMPARE_ID = 'paseo-git-graph/compare'
 export const COMPARE_KIND = 'git-compare'
 
-export const ROUTE = '/api/dsh-git-graph'
+export const ROUTE = '/api/paseo-git-graph'
 /** The host pushes repository changes to this route while the tab is on screen. */
-export const EVENTS_ROUTE = '/api/dsh-git-graph/events'
+export const EVENTS_ROUTE = '/api/paseo-git-graph/events'
 export const EMPTY_TREE = '4b825dc642cb6eb9a060e54bf8d69288fbee4904'
 
 export const LANE_COLORS = [

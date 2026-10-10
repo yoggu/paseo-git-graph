@@ -34,4 +34,4 @@ The highlighter is bundled; `npm run build:syntax` regenerates it.
 Install locally with `paseo plugin install "$PWD"`; reload with `paseo plugin reload paseo-git-graph`.
 React Native development tooling has known audit warnings (`npm audit`); it is not shipped with the plugin.
 
-Own/DSH code: [MIT](LICENSE). Adapted Paseo code: Apache-2.0; see [NOTICE](NOTICE).
+Paseo Git Graph is licensed under [MIT](LICENSE). Third-party code retains its original licenses, including Apache-2.0 for adapted Paseo code; see [NOTICE](NOTICE).
